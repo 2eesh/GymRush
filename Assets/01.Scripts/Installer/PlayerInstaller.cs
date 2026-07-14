@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInstaller : MonoBehaviour
 {
     [SerializeField] VirtualJoystick _joystick;
-    
+
     private void Start()
     {
         PlayerView view = GetComponent<PlayerView>();
@@ -12,7 +12,7 @@ public class PlayerInstaller : MonoBehaviour
 
         PlayerModel model = new PlayerModel(Vector2.down, 5.0f);
         PlayerPresenter presenter = new PlayerPresenter(model, view);
-        
+
         view.Construct(presenter);
         controller.Construct(presenter, _joystick);
     }

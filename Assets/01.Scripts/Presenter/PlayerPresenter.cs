@@ -11,26 +11,16 @@ public class PlayerPresenter
         _view = view;
     }
 
-    public void SetDirection(Vector2 direction)
+    public void UpdateDirection(Vector2 direction)
     {
-        if (direction == Vector2.zero)
-        {
-            _model.Direction = direction;
-        }
+        _model.Direction = direction;
         
-        UpdateRotation();
-        UpdateVelocity(direction);
+        UpdateVelocity();
     }
-
-    private void UpdateRotation()
+    
+    private void UpdateVelocity()
     {
-        float angle = Mathf.Atan2(_model.Direction.y, _model.Direction.x) * Mathf.Rad2Deg;
-        _view.SetRotation(angle);
-    }
-
-    private void UpdateVelocity(Vector3 direction)
-    {
-        Vector3 velocity = direction.normalized * _model.MoveSpeed;
+        Vector3 velocity = _model.Direction.normalized * _model.MoveSpeed;
         _view.SetVelocity(velocity);
     }
 }
