@@ -17,6 +17,6 @@ public class PlayerInputController : MonoBehaviour
     private void Update()
     {
         Vector2 direction = Vector2.ClampMagnitude(_keyboardSource.GetDirection() + _joystickSource.GetDirection(), 1.0f);
-        _presenter.SetDirection(direction);
+        _presenter.UpdateDirection(direction);
     }
 }

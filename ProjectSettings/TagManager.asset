@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - ZoneMat
+  - Object
+  - Character
+  - WorldUI
   - 
   - 
   - 
@@ -41,3 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 1790651453
+    locked: 0
+  - name: ZoneMat
+    uniqueID: 599181261
+    locked: 0
+  - name: Object
+    uniqueID: 2235025513
+    locked: 0
+  - name: Character
+    uniqueID: 748405271
+    locked: 0
+  - name: WorldUI
+    uniqueID: 2929709081
+    locked: 0
+  - name: 
+    uniqueID: 1059274499
+    locked: 0
+  m_RenderingLayers:
+  - Default

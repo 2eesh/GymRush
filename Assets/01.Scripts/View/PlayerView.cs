@@ -14,7 +14,7 @@ public class PlayerView : MonoBehaviour, IPlayerView
     {
         _presenter = presenter;
     }
-    
+
     public void SetVelocity(Vector2 velocity)
     {
         _rigidbody2d.linearVelocity = velocity;
