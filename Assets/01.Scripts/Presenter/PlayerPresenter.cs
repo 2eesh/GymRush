@@ -3,9 +3,21 @@ using UnityEngine;
 public class PlayerPresenter
 {
     private readonly PlayerModel _model;
-    private readonly IPlayerView _view;
+    private readonly ICharacterView _view;
 
-    public PlayerPresenter(PlayerModel model, IPlayerView view)
+    public float GuideGaugeRatePerSecond
+    {
+        get
+        {
+            return _model.GuideGaugeRatePerSecond;
+        }
+        set
+        {
+            _model.GuideGaugeRatePerSecond = value;
+        }
+    }
+
+    public PlayerPresenter(PlayerModel model, ICharacterView view)
     {
         _model = model;
         _view = view;

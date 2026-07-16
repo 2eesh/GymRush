@@ -12,7 +12,7 @@ public class PlayerInstaller : MonoBehaviour
         PlayerView view = GetComponent<PlayerView>();
         PlayerInputController controller = GetComponent<PlayerInputController>();
 
-        PlayerModel model = new PlayerModel(Vector2.down, 5.0f, _startMoney);
+        PlayerModel model = new PlayerModel(Vector2.down, 5.0f, 0.2f, _startMoney);
         PlayerPresenter presenter = new PlayerPresenter(model, view);
         PlayerDataPresenter dataPresenter = new PlayerDataPresenter(model, _dataView);
 
