@@ -16,7 +16,7 @@ public class PlayerInstaller : MonoBehaviour
         PlayerPresenter presenter = new PlayerPresenter(model, view);
         PlayerDataPresenter dataPresenter = new PlayerDataPresenter(model, _dataView);
 
-        view.Construct(presenter);
+        view.Construct(presenter, dataPresenter);
         controller.Construct(presenter, _joystick);
     }
 }

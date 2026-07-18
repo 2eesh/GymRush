@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour, ICharacterView
+public class PlayerView : MonoBehaviour, ICharacterView, ICurrencyReceiver
 {
     private Rigidbody2D _rigidbody2d;
     private PlayerPresenter _presenter;
+    private PlayerDataPresenter _dataPresenter;
 
     public float GuideGaugeRatePerSecond
     {
@@ -22,9 +23,15 @@ public class PlayerView : MonoBehaviour, ICharacterView
         _rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    public void Construct(PlayerPresenter presenter)
+    public void Construct(PlayerPresenter presenter, PlayerDataPresenter dataPresenter)
     {
         _presenter = presenter;
+        _dataPresenter = dataPresenter;
+    }
+
+    public void AddMoney(int amount)
+    {
+        _dataPresenter.AddMoney(amount);
     }
 
     public void SetVelocity(Vector2 velocity)
