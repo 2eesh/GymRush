@@ -9,6 +9,8 @@ public class GuideInterationGaugeZoneController : MonoBehaviour
 {
     [SerializeField] private GuideGauge _guideGauge;
     [SerializeField] private string[] _interactorTags = { "Player" };
+
+    public event Action OnGaugeComplete;
     
     private readonly Dictionary<Collider2D, ICharacterView> _occupants = new Dictionary<Collider2D, ICharacterView>();
     private Coroutine _fillRoutine;
@@ -24,11 +26,14 @@ public class GuideInterationGaugeZoneController : MonoBehaviour
     private void OnDisable()
     {
         _guideGauge.OnGaugeComplated -= CheckComplation;
+        _occupants.Clear();
+        _fillRoutine = null;
     }
 
     private void CheckComplation()
     {
         _guideGauge.ResetGauge();
+        OnGaugeComplete?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
