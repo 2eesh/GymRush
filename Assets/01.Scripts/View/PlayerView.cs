@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour, ICharacterView, ICurrencyReceiver
+public class PlayerView : MonoBehaviour, ICharacterView, ICurrencyReceiver, ICurrencySpender
 {
     private Rigidbody2D _rigidbody2d;
     private PlayerPresenter _presenter;
@@ -32,6 +32,13 @@ public class PlayerView : MonoBehaviour, ICharacterView, ICurrencyReceiver
     public void AddMoney(int amount)
     {
         _dataPresenter.AddMoney(amount);
+    }
+
+    public int Amount => _dataPresenter.Money;
+
+    public void SpendMoney(int amount)
+    {
+        _dataPresenter.SpendMoney(amount);
     }
 
     public void SetVelocity(Vector2 velocity)

@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 7663490241567788385}
   - component: {fileID: 2957793199555060465}
   m_Layer: 0
-  m_Name: UI_ConstructionPoint
+  m_Name: UI_ConstructionGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
