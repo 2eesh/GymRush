@@ -1,8 +1,9 @@
-using System;
 using UnityEngine;
 
 public class GuestPresenter
 {
+    private const float ArriveDistance = 0.15f;
+
     private readonly GuestModel _model;
     private readonly IGuestView _view;
     private readonly GuestContext _context;
@@ -12,12 +13,8 @@ public class GuestPresenter
     public IGuestView View => _view;
     public GuestContext Context => _context;
     public GuestState CurrentStateId => _fsm.CurrentState != null ? _fsm.CurrentState.StateId : default;
-
-    // DecideNext가 정하고 이후 상태들이 사용하는 이동/서비스 목표
-    public IStation TargetStation { get; set; }
-    public Vector2 TargetPosition { get; set; }
-    public GuestState AfterMoveState { get; set; }
-    public Action OnStationCycleComplete { get; set; }
+    
+    public IStation TargetStation { get; private set; }
 
     public GuestPresenter(GuestModel model, IGuestView view, GuestContext context)
     {
@@ -26,19 +23,52 @@ public class GuestPresenter
         _context = context;
         _fsm = new GuestStateMachine(this);
     }
-
-    // 스폰(재사용 포함)마다 호출 — 방문 주기 리셋 후 Enter부터 시작
+    
     public void Setup()
     {
         _model.Setup();
-        TargetStation = null;
-        OnStationCycleComplete = null;
+        ClearTargetStation();
         ChangeState(GuestState.Enter);
+    }
+
+    public void GoToStation(IStation station)
+    {
+        TargetStation = station;
+        ChangeState(GuestState.WaitInQueue);
+    }
+    
+    public void ClearTargetStation()
+    {
+        TargetStation = null;
+    }
+    
+    public void NotifyServiceComplete()
+    {
+        if (CurrentStateId == GuestState.UseStation)
+        {
+            ChangeState(GuestState.DropMoney);
+        }
     }
 
     public void Tick(float deltaTime)
     {
         _fsm.Tick(deltaTime);
+    }
+    
+    public bool MoveTowards(Vector2 target)
+    {
+        Vector2 toTarget = target - _view.Position;
+
+        if (toTarget.magnitude <= ArriveDistance)
+        {
+            _model.Direction = Vector2.zero;
+            _view.SetVelocity(Vector2.zero);
+            return true;
+        }
+
+        _model.Direction = toTarget.normalized;
+        _view.SetVelocity(_model.Direction * _model.MoveSpeed);
+        return false;
     }
 
     public void ChangeState(GuestState state)

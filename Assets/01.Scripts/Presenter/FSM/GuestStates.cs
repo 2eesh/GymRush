@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class GuestStateBase : IState<GuestState>
 {
     public abstract GuestState StateId { get; }
-    protected const float ArriveDistance = 0.15f;
 
     protected readonly GuestPresenter _owner;
     protected GuestModel Model => _owner.Model;
@@ -17,23 +16,6 @@ public abstract class GuestStateBase : IState<GuestState>
     public virtual void Enter() { }
     public virtual void Tick(float deltaTime) { }
     public virtual void Exit() { }
-
-    // 목표 지점으로 직선 이동. 도착하면 정지 후 true 반환
-    protected bool MoveTowards(Vector2 target)
-    {
-        Vector2 toTarget = target - View.Position;
-
-        if (toTarget.magnitude <= ArriveDistance)
-        {
-            Model.Direction = Vector2.zero;
-            View.SetVelocity(Vector2.zero);
-            return true;
-        }
-
-        Model.Direction = toTarget.normalized;
-        View.SetVelocity(Model.Direction * Model.MoveSpeed);
-        return false;
-    }
 }
 
 // 입구에서 스폰되어 짐 안(InsidePoint)으로 이동
@@ -45,7 +27,7 @@ public class GuestEnterState : GuestStateBase
 
     public override void Tick(float deltaTime)
     {
-        if (MoveTowards(_owner.Context.InsidePoint.position))
+        if (_owner.MoveTowards(_owner.Context.InsidePoint.position))
         {
             _owner.ChangeState(GuestState.DecideNext);
         }
@@ -63,13 +45,13 @@ public class GuestDecideNextState : GuestStateBase
     {
         if (!Model.HasPaidCounter)
         {
-            GoToStation(_owner.Context.CounterStation, () => Model.HasPaidCounter = true);
+            _owner.GoToStation(_owner.Context.CounterStation);
             return;
         }
 
         if (!Model.HasChangedClothes)
         {
-            GoToStation(_owner.Context.LockerStation, () => Model.HasChangedClothes = true);
+            _owner.GoToStation(_owner.Context.LockerStation);
             return;
         }
 
@@ -79,39 +61,15 @@ public class GuestDecideNextState : GuestStateBase
 
             if (stations != null && stations.Length > 0)
             {
-                IStation station = stations[Random.Range(0, stations.Length)];
-                GoToStation(station, () => Model.HasExercised = true);
+                _owner.GoToStation(stations[Random.Range(0, stations.Length)]);
+                return;
             }
-            
-            return;
+
+            // 기구가 하나도 없으면 운동 단계를 건너뜀 (영구 정지 방지)
+            Model.HasExercised = true;
         }
 
-        _owner.TargetPosition = _owner.Context.ExitPoint.position;
-        _owner.AfterMoveState = GuestState.Exit;
-        _owner.ChangeState(GuestState.MoveToZone);
-    }
-
-    private void GoToStation(IStation station, System.Action onComplete)
-    {
-        _owner.TargetStation = station;
-        _owner.OnStationCycleComplete = onComplete;
-        _owner.ChangeState(GuestState.WaitInQueue);
-    }
-}
-
-// 목표 지점으로 이동 후 AfterMoveState로 전이
-public class GuestMoveToZoneState : GuestStateBase
-{
-    public override GuestState StateId => GuestState.MoveToZone;
-
-    public GuestMoveToZoneState(GuestPresenter owner) : base(owner) { }
-
-    public override void Tick(float deltaTime)
-    {
-        if (MoveTowards(_owner.TargetPosition))
-        {
-            _owner.ChangeState(_owner.AfterMoveState);
-        }
+        _owner.ChangeState(GuestState.Exit);
     }
 }
 
@@ -121,17 +79,30 @@ public class GuestWaitInQueueState : GuestStateBase
     public override GuestState StateId => GuestState.WaitInQueue;
 
     private bool _enqueued;
+    private bool _movingToSlot;
+    private Vector2 _slotPoint;
 
     public GuestWaitInQueueState(GuestPresenter owner) : base(owner) { }
 
     public override void Enter()
     {
+        _movingToSlot = false;
         _owner.TargetStation.Enqueue(_owner);
         _enqueued = true;
     }
 
     public override void Tick(float deltaTime)
     {
+        if (_movingToSlot)
+        {
+            if (_owner.MoveTowards(_slotPoint))
+            {
+                _owner.ChangeState(GuestState.UseStation);
+            }
+
+            return;
+        }
+
         IStation station = _owner.TargetStation;
         int index = station.GetIndex(_owner);
 
@@ -139,17 +110,16 @@ public class GuestWaitInQueueState : GuestStateBase
         {
             return;
         }
-        
+
         if (index == 0 && station.TryClaimSlot(_owner, out Vector3 usePoint))
         {
             _enqueued = false;
-            _owner.TargetPosition = usePoint;
-            _owner.AfterMoveState = GuestState.UseStation;
-            _owner.ChangeState(GuestState.MoveToZone);
+            _movingToSlot = true;
+            _slotPoint = usePoint;
             return;
         }
 
-        MoveTowards(station.GetQueuePoint(index).position);
+        _owner.MoveTowards(station.GetQueuePoint(index).position);
     }
 
     public override void Exit()
@@ -164,42 +134,21 @@ public class GuestWaitInQueueState : GuestStateBase
     }
 }
 
-// 슬롯에서 서비스 이용 — 완료 이벤트가 오면 결제로 전이 (카운터=게이지, 락커/기구=타이머)
+// 슬롯에서 서비스 이용 — 스테이션이 NotifyServiceComplete로 알려줄 때까지 대기
 public class GuestUseStationState : GuestStateBase
 {
     public override GuestState StateId => GuestState.UseStation;
-
-    private IStation _station;
 
     public GuestUseStationState(GuestPresenter owner) : base(owner) { }
 
     public override void Enter()
     {
         View.SetVelocity(Vector2.zero);
-
-        _station = _owner.TargetStation;
-        _station.OnServiceComplete += HandleServiceComplete;
-        _station.BeginService(_owner);
-    }
-
-    private void HandleServiceComplete(GuestPresenter guest)
-    {
-        if (guest != _owner)
-        {
-            return;
-        }
-
-        _owner.ChangeState(GuestState.DropMoney);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        _station.OnServiceComplete -= HandleServiceComplete;
+        _owner.TargetStation.BeginService(_owner);
     }
 }
 
-// 방금 이용한 존의 드랍 위치에 그 존의 요금을 놓기
+// 방금 이용한 존의 드랍 위치에 그 존의 요금을 놓고, 방문 기억을 갱신
 public class GuestDropMoneyState : GuestStateBase
 {
     public override GuestState StateId => GuestState.DropMoney;
@@ -216,9 +165,21 @@ public class GuestDropMoneyState : GuestStateBase
         IStation station = _owner.TargetStation;
         View.DropMoney(station.MoneyDropPoint.position, station.ServiceFee);
 
-        _owner.OnStationCycleComplete?.Invoke();
-        _owner.OnStationCycleComplete = null;
-        _owner.TargetStation = null;
+        // 방금 마친 스테이션에 해당하는 방문 기억을 켬
+        if (station == _owner.Context.CounterStation)
+        {
+            Model.HasPaidCounter = true;
+        }
+        else if (station == _owner.Context.LockerStation)
+        {
+            Model.HasChangedClothes = true;
+        }
+        else
+        {
+            Model.HasExercised = true;
+        }
+
+        _owner.ClearTargetStation();
     }
 
     public override void Tick(float deltaTime)
@@ -232,16 +193,18 @@ public class GuestDropMoneyState : GuestStateBase
     }
 }
 
-// 출구 도착 — 스포너에게 알려 풀로 반환
+// 출구로 걸어가 도착하면 스포너에게 알려 풀로 반환
 public class GuestExitState : GuestStateBase
 {
     public override GuestState StateId => GuestState.Exit;
 
     public GuestExitState(GuestPresenter owner) : base(owner) { }
 
-    public override void Enter()
+    public override void Tick(float deltaTime)
     {
-        View.SetVelocity(Vector2.zero);
-        PoolManager.Instance.Return(View as GuestView);
+        if (_owner.MoveTowards(_owner.Context.ExitPoint.position))
+        {
+            PoolManager.Instance.Return(View as GuestView);
+        }
     }
 }

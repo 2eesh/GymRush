@@ -9,7 +9,6 @@ public enum GuestState
 {
     Enter,
     DecideNext,
-    MoveToZone,
     WaitInQueue,
     UseStation,
     DropMoney,

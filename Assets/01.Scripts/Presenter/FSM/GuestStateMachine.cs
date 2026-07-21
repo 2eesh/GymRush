@@ -11,7 +11,6 @@ public class GuestStateMachine : StateMachine<GuestState>
         {
             new GuestEnterState(owner),
             new GuestDecideNextState(owner),
-            new GuestMoveToZoneState(owner),
             new GuestWaitInQueueState(owner),
             new GuestUseStationState(owner),
             new GuestDropMoneyState(owner),

@@ -40,8 +40,8 @@ public class CounterStationController : StationControllerBase
         _serviceGaugeRoot.SetActive(false);
         
         FinishService(guest);
-       
-        RaiseServiceComplete(guest);
+
+        guest.NotifyServiceComplete();
     }
 
     public override void BeginService(GuestPresenter guest)

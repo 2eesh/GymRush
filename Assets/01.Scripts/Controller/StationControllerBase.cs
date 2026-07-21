@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 대기줄 + 슬롯 점유 + 타이머 서비스를 기본 제공하는 IStation 공통 구현.
-// 슬롯/서비스 방식이 다른 존(카운터)은 TryClaimSlot/BeginService를 override
-public class StationControllerBase : MonoBehaviour, IStation
+public abstract class StationControllerBase : MonoBehaviour, IStation
 {
     [SerializeField] private Transform[] _queuePoints;
     [SerializeField] private Transform _moneyDropPoint;
@@ -14,7 +12,6 @@ public class StationControllerBase : MonoBehaviour, IStation
     
     private readonly List<GuestPresenter> _line = new List<GuestPresenter>();
     private readonly Dictionary<GuestPresenter, IUsableSlot> _activeSlots = new Dictionary<GuestPresenter, IUsableSlot>();
-    public event Action<GuestPresenter> OnServiceComplete;
 
     public Transform MoneyDropPoint => _moneyDropPoint;
     public int ServiceFee => _serviceFee;
@@ -53,11 +50,6 @@ public class StationControllerBase : MonoBehaviour, IStation
         _line.Remove(guest);
     }
 
-    protected void RaiseServiceComplete(GuestPresenter guest)
-    {
-        OnServiceComplete?.Invoke(guest);
-    }
-
     public virtual bool TryClaimSlot(GuestPresenter guest, out Vector3 usePoint)
     {
         usePoint = default;
@@ -87,7 +79,7 @@ public class StationControllerBase : MonoBehaviour, IStation
         StartCoroutine(ServiceRoutine(guest));
     }
 
-    public void FinishService(GuestPresenter guest)
+    public virtual void FinishService(GuestPresenter guest)
     {
         if (_activeSlots.TryGetValue(guest, out IUsableSlot slot))
         {
@@ -102,7 +94,7 @@ public class StationControllerBase : MonoBehaviour, IStation
 
         FinishService(guest);
 
-        RaiseServiceComplete(guest);
+        guest.NotifyServiceComplete();
     }
 
    
