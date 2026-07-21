@@ -21,6 +21,7 @@ public class GuideInterationGaugeZoneController : MonoBehaviour
     private void OnEnable()
     {
         _guideGauge.OnGaugeComplated += CheckComplation;
+        _guideGauge.ResetGauge();
     }
 
     private void OnDisable()
@@ -32,7 +33,6 @@ public class GuideInterationGaugeZoneController : MonoBehaviour
 
     private void CheckComplation()
     {
-        _guideGauge.ResetGauge();
         OnGaugeComplete?.Invoke();
     }
 

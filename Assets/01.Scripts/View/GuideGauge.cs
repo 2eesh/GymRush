@@ -9,7 +9,7 @@ public class GuideGauge : MonoBehaviour
     public event Action OnGaugeComplated;
     public bool IsGaugeComplated { get; set; } = false;
     private float _currentProgress = 0f;
-    
+
     public void AddProgress(float delta)
     {
         if (IsGaugeComplated)

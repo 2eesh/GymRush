@@ -1,5 +1,7 @@
-public class EquipmentEmptyState : IState
+public class EquipmentEmptyState : IState<EquipmentState>
 {
+    public EquipmentState StateId => EquipmentState.Empty;
+
     private readonly EquipmentModel _model;
     private readonly IEquipmentView _view;
 
@@ -11,7 +13,6 @@ public class EquipmentEmptyState : IState
 
     public void Enter()
     {
-        _model.State = EquipmentState.Empty;
         _view.UpdateState(EquipmentState.Empty);
     }
 
@@ -19,8 +20,10 @@ public class EquipmentEmptyState : IState
     public void Exit() { }
 }
 
-public class EquipmentUsingState : IState
+public class EquipmentUsingState : IState<EquipmentState>
 {
+    public EquipmentState StateId => EquipmentState.Using;
+
     private readonly EquipmentModel _model;
     private readonly IEquipmentView _view;
 
@@ -32,7 +35,6 @@ public class EquipmentUsingState : IState
 
     public void Enter()
     {
-        _model.State = EquipmentState.Using;
         _view.UpdateState(EquipmentState.Using);
     }
 
@@ -40,8 +42,10 @@ public class EquipmentUsingState : IState
     public void Exit() { }
 }
 
-public class EquipmentDirtyState : IState
+public class EquipmentDirtyState : IState<EquipmentState>
 {
+    public EquipmentState StateId => EquipmentState.Dirty;
+
     private readonly EquipmentModel _model;
     private readonly IEquipmentView _view;
 
@@ -53,7 +57,6 @@ public class EquipmentDirtyState : IState
 
     public void Enter()
     {
-        _model.State = EquipmentState.Dirty;
         _view.UpdateState(EquipmentState.Dirty);
     }
 

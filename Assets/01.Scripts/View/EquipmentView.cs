@@ -14,6 +14,7 @@ public class EquipmentView : MonoBehaviour, IEquipmentView
     private Color[] _baseColors;
     private GuideInterationGaugeZoneController _cleaningZoneController;
 
+    public EquipmentPresenter Presenter => _presenter;
     public Transform SeatPoint => _seatPoint;
 
     private void Awake()
@@ -60,6 +61,11 @@ public class EquipmentView : MonoBehaviour, IEquipmentView
         _presenter.Clean();
     }
 
+    private void Start()
+    {
+        _presenter.Setup();
+    }
+
     public void Construct(EquipmentPresenter presenter)
     {
         _presenter = presenter;
@@ -90,16 +96,4 @@ public class EquipmentView : MonoBehaviour, IEquipmentView
         // TODO: 내구도 게이지 UI 연결
     }
 
-    // Guest 구현 전 임시 검증용
-    [ContextMenu("Debug/StartUse")]
-    private void DebugStartUse()
-    {
-        _presenter.StartUse();
-    }
-
-    [ContextMenu("Debug/FinishUse")]
-    private void DebugFinishUse()
-    {
-        _presenter.FinishUse();
-    }
 }

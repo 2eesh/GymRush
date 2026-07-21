@@ -1,8 +1,8 @@
-public class StateMachine
+public class StateMachine<TStateId>
 {
-    public IState CurrentState { get; private set; }
+    public IState<TStateId> CurrentState { get; private set; }
 
-    public void ChangeState(IState next)
+    protected void ChangeState(IState<TStateId> next)
     {
         if (next == null || next == CurrentState)
         {
