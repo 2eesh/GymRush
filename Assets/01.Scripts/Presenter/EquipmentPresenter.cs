@@ -7,6 +7,7 @@ public class EquipmentPresenter : IUsableSlot
     private readonly EquipmentStateMachine _fsm;
 
     public bool CanUse => _fsm.CurrentState.StateId == EquipmentState.Empty;
+    public bool IsDirty => _fsm.CurrentState != null && _fsm.CurrentState.StateId == EquipmentState.Dirty;
     public Transform SeatPoint => _view.SeatPoint;
 
     public EquipmentPresenter(EquipmentModel model, IEquipmentView view)

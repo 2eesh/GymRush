@@ -26,3 +26,16 @@ public enum CounterState
     Empty,
     Using,
 }
+
+public enum EmployeeState
+{
+    Idle,
+    MoveToWork,
+    Work,
+}
+
+public enum EmployeeRole
+{
+    CounterClerk,
+    Cleaner,
+}

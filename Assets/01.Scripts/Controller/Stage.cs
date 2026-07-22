@@ -10,6 +10,9 @@ public class Stage : SingletonMonoBehaviour<Stage>
     [SerializeField] private EquipmentZoneStationController[] _equipmentStations;
     
     public GuestContext Context { get; private set; }
+
+    public CounterStationController CounterStation => _counterStation;
+    public EquipmentZoneStationController[] EquipmentStations => _equipmentStations;
     
     protected override void Awake()
     {

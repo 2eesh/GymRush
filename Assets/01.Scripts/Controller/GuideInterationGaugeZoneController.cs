@@ -8,7 +8,7 @@ using UnityEngine;
 public class GuideInterationGaugeZoneController : MonoBehaviour
 {
     [SerializeField] private GuideGauge _guideGauge;
-    [SerializeField] private string[] _interactorTags = { "Player" };
+    [SerializeField] private string[] _interactorTags = { "Player", "Employee" };
 
     public event Action OnGaugeComplete;
     

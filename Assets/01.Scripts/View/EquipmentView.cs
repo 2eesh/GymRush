@@ -17,6 +17,9 @@ public class EquipmentView : MonoBehaviour, IEquipmentView
     public EquipmentPresenter Presenter => _presenter;
     public Transform SeatPoint => _seatPoint;
 
+    // 청소 직원이 서 있어야 할 위치 — 청소 게이지 존 안쪽
+    public Transform CleaningPoint => _cleaningZone != null ? _cleaningZone.transform : _seatPoint;
+
     private void Awake()
     {
         if (_rendererRoot != null)

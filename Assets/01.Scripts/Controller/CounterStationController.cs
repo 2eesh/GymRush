@@ -7,6 +7,11 @@ public class CounterStationController : StationControllerBase
     [SerializeField] private GameObject _serviceGaugeRoot;
     [SerializeField] private CounterView[] _counters;
 
+    // 카운터 직원이 상주할 위치 — 서비스 게이지 존 콜라이더 안쪽에 배치할 것
+    [SerializeField] private Transform _employeeWorkPoint;
+
+    public Transform EmployeeWorkPoint => _employeeWorkPoint;
+
     protected override IUsableSlot[] Slots => _counters.Select(locker => (IUsableSlot)locker.Presenter).ToArray();
     
     private GuideInterationGaugeZoneController _gaugeController;
