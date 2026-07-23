@@ -14,7 +14,7 @@ public class PlayerInstaller : MonoBehaviour
 
         PlayerModel model = new PlayerModel(Vector2.down, 5.0f, 5f, _startMoney);
         PlayerPresenter presenter = new PlayerPresenter(model, view);
-        PlayerDataPresenter dataPresenter = new PlayerDataPresenter(model, _dataView);
+        PlayerDataPresenter dataPresenter = new PlayerDataPresenter(model, UnlockChainManager.Instance.Progression, _dataView);
 
         view.Construct(presenter, dataPresenter);
         controller.Construct(presenter, _joystick);

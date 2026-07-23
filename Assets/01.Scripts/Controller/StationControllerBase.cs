@@ -9,12 +9,19 @@ public abstract class StationControllerBase : MonoBehaviour, IStation
     [SerializeField] private Transform _moneyDropPoint;
     [SerializeField] private int _serviceFee;
     [SerializeField] private float _serviceDuration = 3.0f;
+    [Tooltip("해금(공사 완료) 시 켜지는 컨텐츠 루트. 지정하면 이 오브젝트가 켜져 있어야 이용 가능한 스테이션으로 취급. 처음부터 열려있는 스테이션은 비워두면 됨")]
+    [SerializeField] private GameObject _contents;
     
     private readonly List<GuestPresenter> _line = new List<GuestPresenter>();
     private readonly Dictionary<GuestPresenter, IUsableSlot> _activeSlots = new Dictionary<GuestPresenter, IUsableSlot>();
 
     public Transform MoneyDropPoint => _moneyDropPoint;
     public int ServiceFee => _serviceFee;
+
+    // 손님/직원이 갈 수 있는 스테이션인지 여부.
+    // 존 루트는 항상 켜져 있고(대기줄/공사존이 루트 밑에 있으므로) 해금 여부는 Contents 활성화로 표현되기 때문에,
+    // 루트가 아니라 Contents가 켜져 있는지를 본다.
+    public bool IsAvailable => gameObject.activeInHierarchy && (_contents == null || _contents.activeInHierarchy);
     
     protected virtual IUsableSlot[] Slots => Array.Empty<IUsableSlot>();
 

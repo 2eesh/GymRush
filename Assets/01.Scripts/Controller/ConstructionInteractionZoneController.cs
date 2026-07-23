@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ConstructionInteractionZoneController : MonoBehaviour
 {
+    [SerializeField] private string _unlockId;
+    [Tooltip("해금 대기 중일 때 통째로 숨길 루트(예: ConstructionMaker). 비워두면 이 오브젝트 자신을 숨김")]
+    [SerializeField] private GameObject _zoneRoot;
     [SerializeField] private ConstructionGauge _constructionGauge;
     [SerializeField] private string[] _interactorTags = { "Player" };
     [SerializeField] private float _spendRatePerSecond = 100f;
@@ -16,6 +19,9 @@ public class ConstructionInteractionZoneController : MonoBehaviour
     private Coroutine _fillRoutine;
 
     private bool IsOccupied => _occupants.Count > 0;
+
+    public string UnlockId => _unlockId;
+    public GameObject ZoneRoot => _zoneRoot != null ? _zoneRoot : gameObject;
 
     private void OnEnable()
     {
@@ -38,6 +44,8 @@ public class ConstructionInteractionZoneController : MonoBehaviour
         {
             target.SetActive(true);
         }
+
+        UnlockChainManager.Instance.ReportComplete(_unlockId);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

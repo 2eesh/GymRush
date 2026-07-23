@@ -5,7 +5,7 @@ public class EquipmentInstaller : MonoBehaviour
 {
     [SerializeField] private int _maxDurability = 5;
 
-    private void Start()
+    private void Awake()
     {
         EquipmentView view = GetComponent<EquipmentView>();
         EquipmentModel model = new EquipmentModel(_maxDurability);

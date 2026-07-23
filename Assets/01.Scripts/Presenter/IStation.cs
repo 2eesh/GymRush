@@ -4,6 +4,7 @@ public interface IStation
 {
     Transform MoneyDropPoint { get; }
     int ServiceFee { get; }
+    bool IsAvailable { get; }
 
     int Enqueue(GuestPresenter guest);
     int GetIndex(GuestPresenter guest);

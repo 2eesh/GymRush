@@ -10,8 +10,8 @@ public class UIPlayerDataView : MonoBehaviour, IPlayerDataView
     
     public void UpdateQuestProgress(int complate, int total)
     {
-        _questProgressText.text = $"{complate}/{total}"; 
-        _fillGaugeQuestProgress.fillAmount = complate / total;
+        _questProgressText.text = $"{complate}/{total}";
+        _fillGaugeQuestProgress.fillAmount = total > 0 ? (float)complate / total : 0f;
     }
 
     public void UpdateMoney(int money)

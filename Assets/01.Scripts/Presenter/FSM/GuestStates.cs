@@ -43,13 +43,14 @@ public class GuestDecideNextState : GuestStateBase
 
     public override void Enter()
     {
-        if (!Model.HasPaidCounter)
+        // 잠긴(비활성) 존의 스테이션은 목적지 후보에서 제외 — 해금 전 구역으로 걸어가는 것 방지
+        if (!Model.HasPaidCounter && _owner.Context.CounterStation.IsAvailable)
         {
             _owner.GoToStation(_owner.Context.CounterStation);
             return;
         }
 
-        if (!Model.HasChangedClothes)
+        if (!Model.HasChangedClothes && _owner.Context.LockerStation.IsAvailable)
         {
             _owner.GoToStation(_owner.Context.LockerStation);
             return;
@@ -57,19 +58,38 @@ public class GuestDecideNextState : GuestStateBase
 
         if (!Model.HasExercised)
         {
-            IStation[] stations = _owner.Context.EquipmentStations;
+            IStation station = PickRandomAvailableStation(_owner.Context.EquipmentStations);
 
-            if (stations != null && stations.Length > 0)
+            if (station != null)
             {
-                _owner.GoToStation(stations[Random.Range(0, stations.Length)]);
+                _owner.GoToStation(station);
                 return;
             }
 
-            // 기구가 하나도 없으면 운동 단계를 건너뜀 (영구 정지 방지)
+            // 이용 가능한 기구가 하나도 없으면 운동 단계를 건너뜀 (영구 정지 방지)
             Model.HasExercised = true;
         }
 
         _owner.ChangeState(GuestState.Exit);
+    }
+
+    private static IStation PickRandomAvailableStation(IStation[] stations)
+    {
+        if (stations == null || stations.Length == 0)
+        {
+            return null;
+        }
+
+        var available = new System.Collections.Generic.List<IStation>(stations.Length);
+        foreach (IStation station in stations)
+        {
+            if (station.IsAvailable)
+            {
+                available.Add(station);
+            }
+        }
+
+        return available.Count > 0 ? available[Random.Range(0, available.Count)] : null;
     }
 }
 

@@ -19,7 +19,8 @@ public class CleanerJob : IEmployeeJob
 
         foreach (EquipmentView equipment in _equipments)
         {
-            if (equipment.Presenter != null && equipment.Presenter.IsDirty)
+            // 해금 전(비활성) 존의 기구는 청소 대상에서 제외
+            if (equipment.gameObject.activeInHierarchy && equipment.Presenter != null && equipment.Presenter.IsDirty)
             {
                 _current = equipment.Presenter;
                 workPoint = equipment.CleaningPoint.position;
