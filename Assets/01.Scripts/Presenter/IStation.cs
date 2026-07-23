@@ -2,9 +2,10 @@ using UnityEngine;
 
 public interface IStation
 {
-    Transform MoneyDropPoint { get; }
     int ServiceFee { get; }
     bool IsAvailable { get; }
+
+    void DepositMoney(int amount);
 
     int Enqueue(GuestPresenter guest);
     int GetIndex(GuestPresenter guest);

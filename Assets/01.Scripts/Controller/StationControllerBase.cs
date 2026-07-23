@@ -6,7 +6,8 @@ using UnityEngine;
 public abstract class StationControllerBase : MonoBehaviour, IStation
 {
     [SerializeField] private Transform[] _queuePoints;
-    [SerializeField] private Transform _moneyDropPoint;
+    [Tooltip("이 스테이션의 요금이 쌓이는 고정 MoneyPile. 씬에 활성 상태 + Start Count 0으로 배치하면 시작 직후 스스로 꺼짐")]
+    [SerializeField] private MoneyPileView _moneyPile;
     [SerializeField] private int _serviceFee;
     [SerializeField] private float _serviceDuration = 3.0f;
     [Tooltip("해금(공사 완료) 시 켜지는 컨텐츠 루트. 지정하면 이 오브젝트가 켜져 있어야 이용 가능한 스테이션으로 취급. 처음부터 열려있는 스테이션은 비워두면 됨")]
@@ -15,8 +16,18 @@ public abstract class StationControllerBase : MonoBehaviour, IStation
     private readonly List<GuestPresenter> _line = new List<GuestPresenter>();
     private readonly Dictionary<GuestPresenter, IUsableSlot> _activeSlots = new Dictionary<GuestPresenter, IUsableSlot>();
 
-    public Transform MoneyDropPoint => _moneyDropPoint;
     public int ServiceFee => _serviceFee;
+
+    public void DepositMoney(int amount)
+    {
+        if (_moneyPile == null)
+        {
+            Debug.LogWarning($"[{name}] MoneyPile이 연결되지 않아 요금을 적립할 수 없습니다.");
+            return;
+        }
+
+        _moneyPile.Deposit(amount);
+    }
 
     // 손님/직원이 갈 수 있는 스테이션인지 여부.
     // 존 루트는 항상 켜져 있고(대기줄/공사존이 루트 밑에 있으므로) 해금 여부는 Contents 활성화로 표현되기 때문에,

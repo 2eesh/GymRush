@@ -15,10 +15,12 @@ public class MoneyPileView : MonoBehaviour, IMoneyPileView
 
     private Collider2D _collider;
     private MoneyPilePresenter _presenter;
+    private Vector3 _originPosition;
 
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
+        _originPosition = transform.position;
     }
 
     public void Construct(MoneyPilePresenter presenter)
@@ -32,6 +34,28 @@ public class MoneyPileView : MonoBehaviour, IMoneyPileView
         _money2.SetActive(count >= 2 && count < 4);
         _money4.SetActive(count >= 4 && count < 8);
         _money8.SetActive(count >= 8);
+    }
+
+    // 게스트가 요금을 놓을 때 스테이션이 호출하는 진입점
+    public void Deposit(int amount)
+    {
+        if (_presenter == null)
+        {
+            Debug.LogWarning($"[{name}] 아직 조립되지 않아 요금을 적립할 수 없습니다. 씬에서 활성 상태로 배치했는지 확인하세요.");
+            return;
+        }
+
+        _presenter.Deposit(amount);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     public void PlayCollectEffect(Transform target, Action onArrived)
@@ -61,8 +85,10 @@ public class MoneyPileView : MonoBehaviour, IMoneyPileView
             yield return null;
         }
 
+        // 파괴하지 않고 원위치로 되돌려 재사용 — 활성/비활성 결정은 Presenter 몫
+        transform.position = _originPosition;
+        _collider.enabled = true;
         onArrived?.Invoke();
-        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

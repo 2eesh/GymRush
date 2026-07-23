@@ -9,6 +9,14 @@ public class MoneyPileModel
         Count = Mathf.Max(0, count);
     }
 
+    public void Add(int amount)
+    {
+        if (amount > 0)
+        {
+            Count += amount;
+        }
+    }
+
     public int Collect()
     {
         int collected = Count;

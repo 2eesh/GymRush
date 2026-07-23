@@ -3,8 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class GuestView : MonoBehaviour, IGuestView, IPoolable
 {
-    [SerializeField] private MoneyPileInstaller _moneyPilePrefab;
-
     private Rigidbody2D _rigidbody2d;
     private GuestPresenter _presenter;
 
@@ -42,18 +40,6 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
     public void SetPosition(Vector2 position)
     {
         _rigidbody2d.position = position;
-    }
-
-    public void DropMoney(Vector2 position, int amount)
-    {
-        if (_moneyPilePrefab == null)
-        {
-            Debug.LogWarning($"[GuestView] {name}에 MoneyPile 프리팹이 연결되지 않았습니다.");
-            return;
-        }
-
-        MoneyPileInstaller pile = Instantiate(_moneyPilePrefab, position, Quaternion.identity);
-        pile.Setup(amount);
     }
 
     public void OnSpawn()
