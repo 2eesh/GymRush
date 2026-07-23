@@ -5,6 +5,8 @@ public interface IStation
     int ServiceFee { get; }
     bool IsAvailable { get; }
 
+    Vector3 MoneyPilePosition { get; }
+
     void DepositMoney(int amount);
 
     int Enqueue(GuestPresenter guest);

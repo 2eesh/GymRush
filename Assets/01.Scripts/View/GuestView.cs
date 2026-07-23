@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class GuestView : MonoBehaviour, IGuestView, IPoolable
 {
+    [Tooltip("요금을 지불할 때 게스트가 던지는 연출용 프리팹(돈 비주얼). 비워두면 연출 없이 즉시 적립")]
+    [FormerlySerializedAs("_moneyThrowEffectPrefab")]
+    [SerializeField] private ProjectileEffect _throwEffectPrefab;
+
     private Rigidbody2D _rigidbody2d;
     private GuestPresenter _presenter;
 
@@ -40,6 +46,19 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
     public void SetPosition(Vector2 position)
     {
         _rigidbody2d.position = position;
+    }
+
+    // 자기 위치에서 목표 지점으로 돈을 던지는 연출. 도착 시 onArrived 호출(적립 시점)
+    public void ThrowMoney(Vector3 target, Action onArrived)
+    {
+        if (_throwEffectPrefab == null)
+        {
+            onArrived?.Invoke();
+            return;
+        }
+
+        ProjectileEffect effect = PoolManager.Instance.Get(_throwEffectPrefab, transform.position, Quaternion.identity);
+        effect.Play(target, onArrived);
     }
 
     public void OnSpawn()

@@ -18,6 +18,9 @@ public abstract class StationControllerBase : MonoBehaviour, IStation
 
     public int ServiceFee => _serviceFee;
 
+    // 게스트가 던진 돈이 도착할 위치. 파일이 없으면 스테이션 자신의 위치로 대체
+    public Vector3 MoneyPilePosition => _moneyPile != null ? _moneyPile.transform.position : transform.position;
+
     public void DepositMoney(int amount)
     {
         if (_moneyPile == null)

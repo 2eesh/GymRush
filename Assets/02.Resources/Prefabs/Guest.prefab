@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d8f659c01f4cf498252b74013635ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GuestView
-  _moneyPilePrefab: {fileID: 6518094301479545569, guid: ef13e050dab78564dbb182bdb9c3d890, type: 3}
+  _moneyThrowEffectPrefab: {fileID: 9209882737070097307, guid: 66a2da630ac744847b49fc4e24506138, type: 3}
 --- !u!114 &5934256382546326544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,11 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GuestInstaller
   _moveSpeed: 3
-  _insidePoint: {fileID: 0}
-  _exitPoint: {fileID: 0}
-  _counterStation: {fileID: 0}
-  _lockerStation: {fileID: 0}
-  _equipmentStations: []
 --- !u!1 &2554715185493814304
 GameObject:
   m_ObjectHideFlags: 0
