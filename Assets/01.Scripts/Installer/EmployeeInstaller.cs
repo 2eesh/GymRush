@@ -5,6 +5,9 @@ using UnityEngine;
 public class EmployeeInstaller : MonoBehaviour
 {
     [SerializeField] private EmployeeRole _role;
+
+    [Tooltip("업그레이드/저장에 쓰이는 직원 고유 Id. 비워두면 오브젝트 이름 사용")]
+    [SerializeField] private string _employeeId;
     [SerializeField] private float _moveSpeed = 3.0f;
     [SerializeField] private float _guideGaugeRatePerSecond = 0.5f;
 
@@ -26,7 +29,8 @@ public class EmployeeInstaller : MonoBehaviour
         }
 
         EmployeeView view = GetComponent<EmployeeView>();
-        EmployeeModel model = new EmployeeModel(_moveSpeed, _guideGaugeRatePerSecond);
+        string employeeId = string.IsNullOrEmpty(_employeeId) ? gameObject.name : _employeeId;
+        EmployeeModel model = new EmployeeModel(employeeId, _role, _moveSpeed, _guideGaugeRatePerSecond);
         IEmployeeJob job = CreateJob();
         if (job == null)
         {
@@ -36,7 +40,7 @@ public class EmployeeInstaller : MonoBehaviour
         }
 
         // 배치된 초기 위치가 곧 대기(휴식) 지점
-        EmployeePresenter presenter = new EmployeePresenter(model, view, job, transform.position);
+        EmployeePresenter presenter = new EmployeePresenter(model, view, job, transform.position, EmployeeUpgradeManager.Instance.Upgrades);
         view.Construct(presenter);
         presenter.Setup();
     }

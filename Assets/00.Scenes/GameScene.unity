@@ -8432,6 +8432,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5228297646922840269, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
+      propertyPath: _employeeId
+      value: Cleaner_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5228297646922840269, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
       propertyPath: _guideGaugeRatePerSecond
       value: 1
       objectReference: {fileID: 0}
@@ -8634,6 +8638,10 @@ PrefabInstance:
       propertyPath: _stage
       value: 
       objectReference: {fileID: 696779674}
+    - target: {fileID: 1037647673012489244, guid: e84c1c43c15199145a48f61a8358a286, type: 3}
+      propertyPath: _employeeId
+      value: Counter_1
+      objectReference: {fileID: 0}
     - target: {fileID: 1037647673012489244, guid: e84c1c43c15199145a48f61a8358a286, type: 3}
       propertyPath: _guideGaugeRatePerSecond
       value: 1

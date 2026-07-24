@@ -21,6 +21,11 @@ public class EmployeeView : MonoBehaviour, IEmployeeView
         _presenter?.Tick(Time.deltaTime);
     }
 
+    private void OnDestroy()
+    {
+        _presenter?.Dispose();
+    }
+
     public void Construct(EmployeePresenter presenter)
     {
         _presenter = presenter;
