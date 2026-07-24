@@ -39,10 +39,10 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
         _presenter?.Tick(Time.deltaTime);
     }
 
-    // 스포너가 풀에서 꺼낸 직후 호출. 최초 1회만 MVP 조립, 이후엔 런 상태 리셋
-    public void Setup()
+    // 스포너가 풀에서 꺼낸 직후 호출. 소속 스테이지의 컨텍스트를 주입받아 런 상태 리셋
+    public void Setup(GuestContext context)
     {
-        _presenter.Setup();
+        _presenter.Setup(context);
     }
     
     public void Construct(GuestPresenter presenter)

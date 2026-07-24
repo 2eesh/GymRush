@@ -8,9 +8,23 @@ public class EmployeeInstaller : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3.0f;
     [SerializeField] private float _guideGaugeRatePerSecond = 0.5f;
 
+    [Tooltip("소속 스테이지. 비워두면 부모에서 자동 탐색")]
+    [SerializeField] private Stage _stage;
+
     // Stage.Awake에서 Context가 조립된 뒤에 참조해야 하므로 Start에서 조립
     private void Start()
     {
+        if (_stage == null)
+        {
+            _stage = GetComponentInParent<Stage>();
+        }
+
+        if (_stage == null)
+        {
+            Debug.LogError("[EmployeeInstaller] 소속 Stage를 찾을 수 없습니다. 인스펙터에서 할당하거나 Stage 하위에 배치하세요.", this);
+            return;
+        }
+
         EmployeeView view = GetComponent<EmployeeView>();
         EmployeeModel model = new EmployeeModel(_moveSpeed, _guideGaugeRatePerSecond);
         IEmployeeJob job = CreateJob();
@@ -32,7 +46,7 @@ public class EmployeeInstaller : MonoBehaviour
         switch (_role)
         {
             case EmployeeRole.CounterClerk:
-                if (Stage.Instance.CounterStation.Contents is not GaugeStationContents counterContents)
+                if (_stage.CounterStation.Contents is not GaugeStationContents counterContents)
                 {
                     Debug.LogError("[EmployeeInstaller] CounterStation의 Contents가 GaugeStationContents가 아닙니다.", this);
                     return null;
@@ -49,7 +63,7 @@ public class EmployeeInstaller : MonoBehaviour
 
             case EmployeeRole.Cleaner:
                 var equipments = new List<EquipmentView>();
-                foreach (StationController station in Stage.Instance.EquipmentStations)
+                foreach (StationController station in _stage.EquipmentStations)
                 {
                     equipments.AddRange(station.Contents.Equipments);
                 }

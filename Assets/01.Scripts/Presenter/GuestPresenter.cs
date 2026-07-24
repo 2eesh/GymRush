@@ -6,26 +6,26 @@ public class GuestPresenter
 
     private readonly GuestModel _model;
     private readonly IGuestView _view;
-    private readonly GuestContext _context;
     private readonly GuestStateMachine _fsm;
 
     public GuestModel Model => _model;
     public IGuestView View => _view;
-    public GuestContext Context => _context;
+    public GuestContext Context { get; private set; }
     public GuestState CurrentStateId => _fsm.CurrentState != null ? _fsm.CurrentState.StateId : default;
-    
+
     public IStation TargetStation { get; private set; }
 
-    public GuestPresenter(GuestModel model, IGuestView view, GuestContext context)
+    public GuestPresenter(GuestModel model, IGuestView view)
     {
         _model = model;
         _view = view;
-        _context = context;
         _fsm = new GuestStateMachine(this);
     }
-    
-    public void Setup()
+
+    // 풀에서 재사용되므로 소속 스테이지의 컨텍스트를 스폰 시마다 다시 주입받는다
+    public void Setup(GuestContext context)
     {
+        Context = context;
         _model.Setup();
         _view.SetExpression(GuestExpression.Neutral);
         ClearTargetStation();

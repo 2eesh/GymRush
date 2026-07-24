@@ -9,7 +9,7 @@ public class GuestInstaller : MonoBehaviour
     {
         GuestView view = GetComponent<GuestView>();
         GuestModel model = new GuestModel(_moveSpeed);
-        GuestPresenter presenter = new GuestPresenter(model, view, Stage.Instance.Context);
+        GuestPresenter presenter = new GuestPresenter(model, view);
         view.Construct(presenter);
     }
 }

@@ -1,22 +1,32 @@
 using UnityEngine;
 
-public class Stage : SingletonMonoBehaviour<Stage>
+public class Stage : MonoBehaviour
 {
+    [SerializeField] private int _stageId = 1;
     [SerializeField] private Transform _insidePoint;
     [SerializeField] private Transform _exitPoint;
     [SerializeField] private StationController _counterStation;
     [SerializeField] private StationController _lockerStation;
     [SerializeField] private StationController[] _equipmentStations;
 
+    public int StageId => _stageId;
     public GuestContext Context { get; private set; }
 
     public StationController CounterStation => _counterStation;
     public StationController[] EquipmentStations => _equipmentStations;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         Setup();
+        StageManager.Instance.Register(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (StageManager.HasInstance)
+        {
+            StageManager.Instance.Unregister(this);
+        }
     }
 
     private void Setup()

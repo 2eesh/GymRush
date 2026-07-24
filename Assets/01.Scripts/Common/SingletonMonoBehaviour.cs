@@ -16,6 +16,9 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
         }
     }
 
+    // 에러 로그 없이 인스턴스 존재 여부만 확인 (앱 종료 시 파괴 순서 대비)
+    public static bool HasInstance => _instance != null;
+
     protected virtual void Awake()
     {
         if (_instance == null)
