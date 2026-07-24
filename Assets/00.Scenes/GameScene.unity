@@ -227,7 +227,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1290516807}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 1857821876}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -440,7 +440,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 731710051}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 698594932}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -859,7 +859,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 115380870}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 799624196}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -1695,7 +1695,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1527743053}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 1289651389}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 8800000000000000301}
   _moneyPile: {fileID: 433607432}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1001 &293121704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1861,7 +1861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &293130629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,7 +2067,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1572689658430507312, guid: 422eb69f6d442624789318310cbe5ccd, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 1669774851897184929, guid: 422eb69f6d442624789318310cbe5ccd, type: 3}
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 1857821876}
   _moneyPile: {fileID: 187881167}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &361936952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,7 +2581,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -4141,7 +4141,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -5247,7 +5247,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 550759157}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 462818898}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -5325,7 +5325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 799624196}
   _moneyPile: {fileID: 171740414}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &1122390721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5626,7 +5626,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8397014744065842283, guid: 48f2bedc2792497478a16fe7371fecd7, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6358,7 +6358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 698594932}
   _moneyPile: {fileID: 1749599010}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &1519661015
 GameObject:
   m_ObjectHideFlags: 0
@@ -6697,7 +6697,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1575785319}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 2145484952}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -7192,7 +7192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInstaller
   _joystick: {fileID: 512169412}
   _dataView: {fileID: 1622699692}
-  _startMoney: 1000
+  _startMoney: 300
 --- !u!114 &1674182433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8309,7 +8309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 1289651389}
   _moneyPile: {fileID: 1532206532}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &1948382057
 GameObject:
   m_ObjectHideFlags: 0
@@ -8395,7 +8395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1984364755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8505,7 +8505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 462818898}
   _moneyPile: {fileID: 301603339}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &2010255306
 GameObject:
   m_ObjectHideFlags: 0
@@ -8876,7 +8876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 324114545}
   _moneyPile: {fileID: 506614109}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!114 &2077853224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9017,7 +9017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContentUnit
   _slotRoot: {fileID: 2145484952}
   _moneyPile: {fileID: 1129989829}
-  _serviceFee: 1
+  _serviceFee: 10
 --- !u!1 &2115764567
 GameObject:
   m_ObjectHideFlags: 0
@@ -9384,7 +9384,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -9523,7 +9523,7 @@ PrefabInstance:
       objectReference: {fileID: 696779674}
     - target: {fileID: 5228297646922840269, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
       propertyPath: _moveSpeed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5228297646922840269, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
       propertyPath: _employeeId
@@ -9531,7 +9531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5228297646922840269, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
       propertyPath: _guideGaugeRatePerSecond
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6299377277011360827, guid: 1da7f7fde49140140afe064bc82b9508, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9712,7 +9712,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8397014744065842283, guid: 48f2bedc2792497478a16fe7371fecd7, type: 3}
-      propertyPath: _interactorTags.Array.data[1]
+      propertyPath: '_interactorTags.Array.data[1]'
       value: Employee
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9738,7 +9738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1037647673012489244, guid: e84c1c43c15199145a48f61a8358a286, type: 3}
       propertyPath: _guideGaugeRatePerSecond
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2417342874530084205, guid: e84c1c43c15199145a48f61a8358a286, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9879,7 +9879,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8800000000000000102}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 8800000000000000103}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -9994,7 +9994,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8800000000000000202}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: _revealOnComplete.Array.data[0]
+      propertyPath: '_revealOnComplete.Array.data[0]'
       value: 
       objectReference: {fileID: 8800000000000000203}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
