@@ -9,8 +9,15 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
     [FormerlySerializedAs("_moneyThrowEffectPrefab")]
     [SerializeField] private ProjectileEffect _throwEffectPrefab;
 
+    [Tooltip("표정 연출에 사용할 얼굴 스프라이트 렌더러")]
+    [SerializeField] private SpriteRenderer _faceRenderer;
+
+    [SerializeField] private Color _happyFaceColor = new Color(0.53f, 0.81f, 0.92f);   // 하늘색
+    [SerializeField] private Color _annoyedFaceColor = new Color(1f, 0.6f, 0.6f);      // 연한 빨간색
+
     private Rigidbody2D _rigidbody2d;
     private GuestPresenter _presenter;
+    private Color _neutralFaceColor;
 
     public Vector2 Position => transform.position;
 
@@ -20,6 +27,11 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
     private void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
+
+        if (_faceRenderer != null)
+        {
+            _neutralFaceColor = _faceRenderer.color;
+        }
     }
 
     private void Update()
@@ -59,6 +71,22 @@ public class GuestView : MonoBehaviour, IGuestView, IPoolable
 
         ProjectileEffect effect = PoolManager.Instance.Get(_throwEffectPrefab, transform.position, Quaternion.identity);
         effect.Play(target, onArrived);
+    }
+
+    // 표정에 맞춰 얼굴 색을 바꾸는 연출. 렌더러가 비어 있으면 무시
+    public void SetExpression(GuestExpression expression)
+    {
+        if (_faceRenderer == null)
+        {
+            return;
+        }
+
+        _faceRenderer.color = expression switch
+        {
+            GuestExpression.Happy => _happyFaceColor,
+            GuestExpression.Annoyed => _annoyedFaceColor,
+            _ => _neutralFaceColor,
+        };
     }
 
     public void OnSpawn()

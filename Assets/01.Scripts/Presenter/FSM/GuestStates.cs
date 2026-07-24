@@ -107,6 +107,17 @@ public class GuestWaitInQueueState : GuestStateBase
     public override void Enter()
     {
         _movingToSlot = false;
+
+        // 대기줄이 꽉 찼으면 줄을 서지 않고 짜증을 내며 퇴장
+        if (!_owner.TargetStation.HasQueueSpace)
+        {
+            _enqueued = false;
+            View.SetExpression(GuestExpression.Annoyed);
+            _owner.ClearTargetStation();
+            _owner.ChangeState(GuestState.Exit);
+            return;
+        }
+
         _owner.TargetStation.Enqueue(_owner);
         _enqueued = true;
     }
@@ -197,6 +208,7 @@ public class GuestDropMoneyState : GuestStateBase
         else
         {
             Model.HasExercised = true;
+            View.SetExpression(GuestExpression.Happy);
         }
 
         _owner.ClearTargetStation();

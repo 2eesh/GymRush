@@ -27,6 +27,7 @@ public class GuestPresenter
     public void Setup()
     {
         _model.Setup();
+        _view.SetExpression(GuestExpression.Neutral);
         ClearTargetStation();
         ChangeState(GuestState.Enter);
     }

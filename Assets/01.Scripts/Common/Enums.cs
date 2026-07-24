@@ -15,6 +15,13 @@ public enum GuestState
     Exit,
 }
 
+public enum GuestExpression
+{
+    Neutral,
+    Happy,
+    Annoyed,
+}
+
 public enum LockerState
 {
     Empty,

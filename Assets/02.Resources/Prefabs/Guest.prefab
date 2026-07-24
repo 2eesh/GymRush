@@ -159,7 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d8f659c01f4cf498252b74013635ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GuestView
-  _moneyThrowEffectPrefab: {fileID: 9209882737070097307, guid: 66a2da630ac744847b49fc4e24506138, type: 3}
+  _throwEffectPrefab: {fileID: 9209882737070097307, guid: 66a2da630ac744847b49fc4e24506138, type: 3}
+  _faceRenderer: {fileID: 747779422557823410}
+  _happyFaceColor: {r: 0.53, g: 0.81, b: 0.92, a: 1}
+  _annoyedFaceColor: {r: 0.9433962, g: 0.18096577, b: 0.18096577, a: 1}
 --- !u!114 &5934256382546326544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +531,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.10680854, b: 0, a: 1}
+  m_Color: {r: 0.482353, g: 0.4078432, b: 0.9333334, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
