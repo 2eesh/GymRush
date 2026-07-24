@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LockerView : MonoBehaviour, ILockerView
+public class LockerView : MonoBehaviour, ILockerView, ISlotViewProvider
 {
     [SerializeField] private Transform _seatPoint;
     [SerializeField] private Transform _rendererRoot;
@@ -11,6 +11,7 @@ public class LockerView : MonoBehaviour, ILockerView
     private Color[] _baseColors;
 
     public LockerPresenter Presenter => _presenter;
+    public IUsableSlot Slot => _presenter;
     public Transform SeatPoint => _seatPoint;
 
     private void Awake()

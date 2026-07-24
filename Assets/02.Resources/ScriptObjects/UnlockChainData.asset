@@ -13,8 +13,26 @@ MonoBehaviour:
   m_Name: UnlockChainData
   m_EditorClassIdentifier: Assembly-CSharp::UnlockChainData
   _entries:
-  - Id: Bench_1
+  - Id: Treadmill_2
     RequiredIds: []
+    Cost: 100
+  - Id: Treadmill_3
+    RequiredIds:
+    - Treadmill_2
+    Cost: 110
+  - Id: Bench_1
+    RequiredIds:
+    - Treadmill_3
+    Cost: 120
+  - Id: Bench_2
+    RequiredIds:
+    - Bench_1
+    Cost: 130
   - Id: Stretching_1
     RequiredIds:
     - Bench_1
+    Cost: 140
+  - Id: Stretching_2
+    RequiredIds:
+    - Bench_1
+    Cost: 140

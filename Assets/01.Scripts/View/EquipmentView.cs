@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EquipmentView : MonoBehaviour, IEquipmentView
+public class EquipmentView : MonoBehaviour, IEquipmentView, ISlotViewProvider
 {
     [SerializeField] private Transform _seatPoint;
     [SerializeField] private Transform _rendererRoot;
@@ -15,6 +15,7 @@ public class EquipmentView : MonoBehaviour, IEquipmentView
     private GuideInterationGaugeZoneController _cleaningZoneController;
 
     public EquipmentPresenter Presenter => _presenter;
+    public IUsableSlot Slot => _presenter;
     public Transform SeatPoint => _seatPoint;
 
     // 청소 직원이 서 있어야 할 위치 — 청소 게이지 존 안쪽

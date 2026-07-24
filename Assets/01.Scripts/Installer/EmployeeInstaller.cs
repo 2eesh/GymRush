@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EmployeeView))]
@@ -26,13 +26,29 @@ public class EmployeeInstaller : MonoBehaviour
         switch (_role)
         {
             case EmployeeRole.CounterClerk:
-                return new CounterClerkJob(Stage.Instance.CounterStation.EmployeeWorkPoint);
+                if (Stage.Instance.CounterStation.Contents is not GaugeStationContents counterContents)
+                {
+                    Debug.LogError("[EmployeeInstaller] CounterStation의 Contents가 GaugeStationContents가 아닙니다.", this);
+                    return null;
+                }
+
+                Transform workPoint = counterContents.ClaimWorkPoint();
+                if (workPoint == null)
+                {
+                    Debug.LogError("[EmployeeInstaller] 카운터에 빈 근무점이 없습니다. 카운터 유닛 수보다 직원이 많습니다.", this);
+                    return null;
+                }
+
+                return new CounterClerkJob(workPoint);
 
             case EmployeeRole.Cleaner:
-                EquipmentView[] equipments = Stage.Instance.EquipmentStations
-                    .SelectMany(station => station.Equipments)
-                    .ToArray();
-                return new CleanerJob(equipments);
+                var equipments = new List<EquipmentView>();
+                foreach (StationController station in Stage.Instance.EquipmentStations)
+                {
+                    equipments.AddRange(station.Contents.Equipments);
+                }
+
+                return new CleanerJob(equipments.ToArray());
 
             default:
                 Debug.LogError($"[EmployeeInstaller] 처리되지 않은 직원 역할: {_role}");

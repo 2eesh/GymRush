@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 599181261
-  m_SortingLayer: 2
+  m_SortingLayerID: -1365258215
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -151,7 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cbb5a37cd1e264f8272066df11c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConstructionInteractionZoneController
-  _unlockId: 1
+  _unlockId: Bench_1
+  _zoneRoot: {fileID: 0}
   _constructionGauge: {fileID: 1398715213061220752}
   _interactorTags:
   - Player
@@ -188,7 +189,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.2, z: 1}
+  m_LocalScale: {x: 2.3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3510461932703811167}
@@ -238,8 +239,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 599181261
-  m_SortingLayer: 2
+  m_SortingLayerID: -1365258215
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -281,8 +282,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3267029274177403281}
   - {fileID: 523121956842347372}
+  - {fileID: 3267029274177403281}
   - {fileID: 5671130372831162091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -388,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688121424052582964, guid: 54c29048e10d90b49ac7bb2d9b965d6f, type: 3}
       propertyPath: m_SortingLayerID
-      value: 599181261
+      value: -1365258215
       objectReference: {fileID: 0}
     - target: {fileID: 5140072472836398698, guid: 54c29048e10d90b49ac7bb2d9b965d6f, type: 3}
       propertyPath: m_Value
@@ -429,7 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConstructionGauge
   _slider: {fileID: 3934577647040956711}
   _costText: {fileID: 4325702223893193224}
-  _cost: 500
+  _cost: 300
 --- !u!114 &3934577647040956711 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5140072472836398698, guid: 54c29048e10d90b49ac7bb2d9b965d6f, type: 3}

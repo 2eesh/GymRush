@@ -1,19 +1,18 @@
-using System.Linq;
 using UnityEngine;
 
 public class Stage : SingletonMonoBehaviour<Stage>
 {
     [SerializeField] private Transform _insidePoint;
     [SerializeField] private Transform _exitPoint;
-    [SerializeField] private CounterStationController _counterStation;
-    [SerializeField] private LockerStationController _lockerStation;
-    [SerializeField] private EquipmentZoneStationController[] _equipmentStations;
-    
+    [SerializeField] private StationController _counterStation;
+    [SerializeField] private StationController _lockerStation;
+    [SerializeField] private StationController[] _equipmentStations;
+
     public GuestContext Context { get; private set; }
 
-    public CounterStationController CounterStation => _counterStation;
-    public EquipmentZoneStationController[] EquipmentStations => _equipmentStations;
-    
+    public StationController CounterStation => _counterStation;
+    public StationController[] EquipmentStations => _equipmentStations;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,7 +21,12 @@ public class Stage : SingletonMonoBehaviour<Stage>
 
     private void Setup()
     {
-        IStation[] equipmentStations = _equipmentStations.Cast<IStation>().ToArray();
+        IStation[] equipmentStations = new IStation[_equipmentStations.Length];
+        for (int i = 0; i < _equipmentStations.Length; i++)
+        {
+            equipmentStations[i] = _equipmentStations[i];
+        }
+
         Context = new GuestContext(_insidePoint, _exitPoint, _counterStation, _lockerStation, equipmentStations);
     }
 }

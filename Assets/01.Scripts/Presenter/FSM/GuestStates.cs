@@ -183,7 +183,7 @@ public class GuestDropMoneyState : GuestStateBase
         _elapsed = 0f;
 
         IStation station = _owner.TargetStation;
-        View.ThrowMoney(station.MoneyPilePosition, () => station.DepositMoney(station.ServiceFee));
+        View.ThrowMoney(station.GetMoneyPilePosition(_owner), () => station.DepositMoney(_owner, station.GetServiceFee(_owner)));
 
         // 방금 마친 스테이션에 해당하는 방문 기억을 켬
         if (station == _owner.Context.CounterStation)

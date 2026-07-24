@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CounterView : MonoBehaviour, ICounterView
+public class CounterView : MonoBehaviour, ICounterView, ISlotViewProvider
 {
     [SerializeField] private Transform _seatPoint;
     [SerializeField] private Transform _rendererRoot;
@@ -11,6 +11,7 @@ public class CounterView : MonoBehaviour, ICounterView
     private Color[] _baseColors;
 
     public CounterPresenter Presenter => _presenter;
+    public IUsableSlot Slot => _presenter;
     public Transform SeatPoint => _seatPoint;
 
     private void Awake()

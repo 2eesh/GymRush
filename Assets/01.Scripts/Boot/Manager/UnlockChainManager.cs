@@ -17,6 +17,7 @@ public class UnlockChainManager : SingletonMonoBehaviour<UnlockChainManager>
 
         CollectZones();
         ValidateData();
+        ApplyCosts();
 
         foreach (var zone in _zones.Values)
         {
@@ -57,6 +58,7 @@ public class UnlockChainManager : SingletonMonoBehaviour<UnlockChainManager>
 
             if (AreRequirementsMet(entry))
             {
+                Debug.Log($"[EvaluateUnlocks] {entry.Id}, {zone.UnlockId}");
                 zone.ZoneRoot.SetActive(true);
             }
         }
@@ -78,6 +80,23 @@ public class UnlockChainManager : SingletonMonoBehaviour<UnlockChainManager>
         }
 
         return true;
+    }
+
+    // 데이터에 정의된 공사 비용을 각 존의 게이지에 주입. 데이터에 없는 존은 인스펙터 값을 그대로 사용
+    private void ApplyCosts()
+    {
+        if (_chainData == null)
+        {
+            return;
+        }
+
+        foreach (var entry in _chainData.Entries)
+        {
+            if (_zones.TryGetValue(entry.Id, out var zone))
+            {
+                zone.SetCost(entry.Cost);
+            }
+        }
     }
 
     private void CollectZones()
@@ -120,6 +139,11 @@ public class UnlockChainManager : SingletonMonoBehaviour<UnlockChainManager>
             }
 
             dataIds.Add(entry.Id);
+
+            if (entry.Cost <= 0)
+            {
+                Debug.LogWarning($"[UnlockChain] '{entry.Id}'의 Cost가 0 이하입니다. 존이 즉시 완료될 수 있습니다.", _chainData);
+            }
 
             if (!_zones.ContainsKey(entry.Id))
             {

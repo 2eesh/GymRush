@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(LockerView))]
 public class LockerInstaller : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         LockerView view = GetComponent<LockerView>();
         LockerModel model = new LockerModel();

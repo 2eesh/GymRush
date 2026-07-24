@@ -23,6 +23,8 @@ public class ConstructionInteractionZoneController : MonoBehaviour
     public string UnlockId => _unlockId;
     public GameObject ZoneRoot => _zoneRoot != null ? _zoneRoot : gameObject;
 
+    public void SetCost(int cost) => _constructionGauge.SetCost(cost);
+
     private void OnEnable()
     {
         _constructionGauge.OnConstructionComplete += HandleComplete;
@@ -35,6 +37,7 @@ public class ConstructionInteractionZoneController : MonoBehaviour
 
     private void HandleComplete()
     {
+        Debug.Log($"HandleComplete: {_unlockId}");
         foreach (var target in _hideOnComplete)
         {
             target.SetActive(false);
