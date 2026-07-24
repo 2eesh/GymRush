@@ -9,11 +9,11 @@ public class PlayerPresenter
     {
         get
         {
-            return _model.GuideGaugeRatePerSecond;
+            return _model.GuideGaugeRatePerSecond.Value;
         }
         set
         {
-            _model.GuideGaugeRatePerSecond = value;
+            _model.GuideGaugeRatePerSecond.BaseValue = value;
         }
     }
 
@@ -32,7 +32,7 @@ public class PlayerPresenter
     
     private void UpdateVelocity()
     {
-        Vector3 velocity = _model.Direction.normalized * _model.MoveSpeed;
+        Vector3 velocity = _model.Direction.normalized * _model.MoveSpeed.Value;
         _view.SetVelocity(velocity);
     }
 }

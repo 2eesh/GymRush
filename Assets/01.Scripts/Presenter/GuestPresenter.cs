@@ -68,7 +68,7 @@ public class GuestPresenter
         }
 
         _model.Direction = toTarget.normalized;
-        _view.SetVelocity(_model.Direction * _model.MoveSpeed);
+        _view.SetVelocity(_model.Direction * _model.MoveSpeed.Value);
         return false;
     }
 
