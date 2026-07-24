@@ -36,3 +36,11 @@ MonoBehaviour:
     RequiredIds:
     - Bench_1
     Cost: 140
+  - Id: Employee_Counter
+    RequiredIds:
+    - Treadmill_3
+    Cost: 200
+  - Id: Employee_Cleaner
+    RequiredIds:
+    - Bench_1
+    Cost: 250

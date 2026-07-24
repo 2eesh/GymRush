@@ -14,6 +14,12 @@ public class EmployeeInstaller : MonoBehaviour
         EmployeeView view = GetComponent<EmployeeView>();
         EmployeeModel model = new EmployeeModel(_moveSpeed, _guideGaugeRatePerSecond);
         IEmployeeJob job = CreateJob();
+        if (job == null)
+        {
+            // 근무점 배정 실패 등으로 Job이 없으면 Tick을 중단 (에러 로그는 CreateJob이 출력)
+            view.enabled = false;
+            return;
+        }
 
         // 배치된 초기 위치가 곧 대기(휴식) 지점
         EmployeePresenter presenter = new EmployeePresenter(model, view, job, transform.position);
