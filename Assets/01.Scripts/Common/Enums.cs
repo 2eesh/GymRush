@@ -46,3 +46,9 @@ public enum EmployeeRole
     CounterClerk,
     Cleaner,
 }
+
+public enum EmployeeStatType
+{
+    Speed,    // 이동 속도 (MoveSpeed)
+    WorkRate, // 처리 속도 (GuideGaugeRatePerSecond)
+}
