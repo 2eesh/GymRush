@@ -98,6 +98,10 @@ public class GuestWaitInQueueState : GuestStateBase
 {
     public override GuestState StateId => GuestState.WaitInQueue;
 
+    // 만석 여부를 판정하는 줄 꼬리 기준 거리 — 꼬리에 서 있는 손님과 겹치기 전에 판정
+    private const float JudgeDistance = 0.6f;
+
+    private bool _approaching;
     private bool _enqueued;
     private bool _movingToSlot;
     private Vector2 _slotPoint;
@@ -106,24 +110,19 @@ public class GuestWaitInQueueState : GuestStateBase
 
     public override void Enter()
     {
+        _approaching = true;
+        _enqueued = false;
         _movingToSlot = false;
-
-        // 대기줄이 꽉 찼으면 줄을 서지 않고 짜증을 내며 퇴장
-        if (!_owner.TargetStation.HasQueueSpace)
-        {
-            _enqueued = false;
-            View.SetExpression(GuestExpression.Annoyed);
-            _owner.ClearTargetStation();
-            _owner.ChangeState(GuestState.Exit);
-            return;
-        }
-
-        _owner.TargetStation.Enqueue(_owner);
-        _enqueued = true;
     }
 
     public override void Tick(float deltaTime)
     {
+        if (_approaching)
+        {
+            TickApproach();
+            return;
+        }
+
         if (_movingToSlot)
         {
             if (_owner.MoveTowards(_slotPoint))
@@ -151,6 +150,33 @@ public class GuestWaitInQueueState : GuestStateBase
         }
 
         _owner.MoveTowards(station.GetQueuePoint(index).position);
+    }
+
+    // 줄 꼬리까지 걸어간 뒤 근처에 도착한 순간 만석 여부를 판정 — 걷는 동안의 줄 변화가 반영된다
+    private void TickApproach()
+    {
+        IStation station = _owner.TargetStation;
+        Vector2 tail = station.GetQueuePoint(station.WaitingCount).position;
+
+        bool arrived = _owner.MoveTowards(tail);
+
+        if (!arrived && (tail - View.Position).magnitude > JudgeDistance)
+        {
+            return;
+        }
+
+        _approaching = false;
+
+        if (!station.HasQueueSpace)
+        {
+            View.SetExpression(GuestExpression.Annoyed);
+            _owner.ClearTargetStation();
+            _owner.ChangeState(GuestState.Exit);
+            return;
+        }
+
+        station.Enqueue(_owner);
+        _enqueued = true;
     }
 
     public override void Exit()

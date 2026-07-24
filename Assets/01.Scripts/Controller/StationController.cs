@@ -22,6 +22,8 @@ public class StationController : MonoBehaviour, IStation
 
     public bool HasQueueSpace => _line.Count < _queuePoints.Length;
 
+    public int WaitingCount => _line.Count;
+
     public int Enqueue(GuestPresenter guest)
     {
         _line.Add(guest);
