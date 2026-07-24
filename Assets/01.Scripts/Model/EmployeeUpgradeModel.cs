@@ -24,13 +24,11 @@ public class EmployeeUpgradeModel
         return GetLevel(employeeId, statType) >= MaxLevel;
     }
 
-    // 현재 레벨에 해당하는 스탯 배율 (Lv0 = 1.0, Lv5 = 1.5)
     public float GetMultiplier(string employeeId, EmployeeStatType statType)
     {
         return 1f + BonusPerLevel * GetLevel(employeeId, statType);
     }
 
-    // 다음 레벨로 올리는 비용 (Lv0→1 = 100, Lv4→5 = 500). 만렙이면 0
     public int GetUpgradeCost(string employeeId, EmployeeStatType statType)
     {
         int level = GetLevel(employeeId, statType);

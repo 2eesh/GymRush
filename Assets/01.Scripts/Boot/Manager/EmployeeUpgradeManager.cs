@@ -38,7 +38,6 @@ public class EmployeeUpgradeManager : SingletonMonoBehaviour<EmployeeUpgradeMana
         return Upgrades.GetUpgradeCost(employeeId, statType);
     }
 
-    // 비용을 지불할 수 있을 때만 레벨업하고, 성공 시 spender에게서 차감한다
     public bool TryUpgrade(string employeeId, EmployeeStatType statType, ICurrencySpender spender)
     {
         if (Upgrades.IsMaxLevel(employeeId, statType))
@@ -62,43 +61,4 @@ public class EmployeeUpgradeManager : SingletonMonoBehaviour<EmployeeUpgradeMana
         Debug.Log($"[EmployeeUpgrade] {employeeId} {statType} → Lv{Upgrades.GetLevel(employeeId, statType)} (x{Upgrades.GetMultiplier(employeeId, statType):0.0}), 비용 {cost}");
         return true;
     }
-
-#if UNITY_EDITOR
-    // 업그레이드 UI가 생기기 전까지의 임시 치트 (6단계 UI 완성 시 제거)
-    // 인스펙터의 대상 직원 Id에 대해 — 1: 스피드, 2: 처리속도
-    [Header("에디터 치트")]
-    [Tooltip("치트 키로 업그레이드할 직원 Id (EmployeeInstaller의 Id, 비워두면 오브젝트 이름)")]
-    [SerializeField] private string _cheatTargetId;
-
-    private void Update()
-    {
-        var keyboard = UnityEngine.InputSystem.Keyboard.current;
-        if (keyboard == null || string.IsNullOrEmpty(_cheatTargetId))
-        {
-            return;
-        }
-
-        if (!keyboard.digit1Key.wasPressedThisFrame && !keyboard.digit2Key.wasPressedThisFrame)
-        {
-            return;
-        }
-
-        var spender = FindFirstObjectByType<PlayerView>();
-        if (spender == null)
-        {
-            Debug.LogWarning("[EmployeeUpgrade] 치트 실패 — 씬에서 PlayerView를 찾을 수 없습니다.");
-            return;
-        }
-
-        if (keyboard.digit1Key.wasPressedThisFrame)
-        {
-            TryUpgrade(_cheatTargetId, EmployeeStatType.Speed, spender);
-        }
-
-        if (keyboard.digit2Key.wasPressedThisFrame)
-        {
-            TryUpgrade(_cheatTargetId, EmployeeStatType.WorkRate, spender);
-        }
-    }
-#endif
 }

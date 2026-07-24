@@ -6,6 +6,7 @@ public class EmployeeView : MonoBehaviour, IEmployeeView
     private Rigidbody2D _rigidbody2d;
     private EmployeePresenter _presenter;
 
+    public EmployeePresenter Presenter => _presenter;
     public Vector2 Position => transform.position;
 
     // 게이지 존(GuideInterationGaugeZoneController)이 읽어가는 초당 게이지 충전량
