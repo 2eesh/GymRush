@@ -227,7 +227,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1290516807}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 1857821876}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -440,7 +440,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 731710051}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 698594932}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -859,7 +859,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 115380870}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 799624196}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -1695,7 +1695,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1527743053}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 1289651389}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -2067,7 +2067,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1572689658430507312, guid: 422eb69f6d442624789318310cbe5ccd, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 1669774851897184929, guid: 422eb69f6d442624789318310cbe5ccd, type: 3}
@@ -2581,7 +2581,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -4141,7 +4141,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -5247,7 +5247,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 550759157}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 462818898}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -5626,7 +5626,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8397014744065842283, guid: 48f2bedc2792497478a16fe7371fecd7, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6697,7 +6697,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1575785319}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 2145484952}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -9384,7 +9384,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6634948707189537737, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7205804833263404233, guid: 50a753db1d335e243b829b97f35dc60a, type: 3}
@@ -9712,7 +9712,7 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8397014744065842283, guid: 48f2bedc2792497478a16fe7371fecd7, type: 3}
-      propertyPath: '_interactorTags.Array.data[1]'
+      propertyPath: _interactorTags.Array.data[1]
       value: Employee
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9879,7 +9879,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8800000000000000102}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 8800000000000000103}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
@@ -9994,7 +9994,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8800000000000000202}
     - target: {fileID: 8636428725430750441, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
-      propertyPath: '_revealOnComplete.Array.data[0]'
+      propertyPath: _revealOnComplete.Array.data[0]
       value: 
       objectReference: {fileID: 8800000000000000203}
     - target: {fileID: 8907079246801564994, guid: 6d7c66a2ad593b64399b4211ca2aff22, type: 3}
