@@ -7,6 +7,7 @@ public class EmployeeUpgradeModel
 {
     public const int MaxLevel = 5;
     public const float BonusPerLevel = 0.1f;
+    public const int BaseCostPerLevel = 100;
 
     // 레벨 변경 시 (직원 Id, 스탯 종류, 새 레벨) 통지
     public event Action<string, EmployeeStatType, int> OnLevelChanged;
@@ -27,6 +28,13 @@ public class EmployeeUpgradeModel
     public float GetMultiplier(string employeeId, EmployeeStatType statType)
     {
         return 1f + BonusPerLevel * GetLevel(employeeId, statType);
+    }
+
+    // 다음 레벨로 올리는 비용 (Lv0→1 = 100, Lv4→5 = 500). 만렙이면 0
+    public int GetUpgradeCost(string employeeId, EmployeeStatType statType)
+    {
+        int level = GetLevel(employeeId, statType);
+        return level >= MaxLevel ? 0 : BaseCostPerLevel * (level + 1);
     }
 
     public bool TryLevelUp(string employeeId, EmployeeStatType statType)

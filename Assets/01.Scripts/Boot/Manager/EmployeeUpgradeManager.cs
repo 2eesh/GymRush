@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 
 // 직원 업그레이드의 단일 진입점. 레벨 데이터는 EmployeeUpgradeModel이 들고 있고,
-// 여기서는 씬 접근(싱글톤)과 업그레이드 시도 절차를 담당한다.
-// TODO: 5단계에서 재화(CurrencyModel) 차감 검증을 TryUpgrade에 추가
+// 여기서는 씬 접근(싱글톤)과 비용 지불을 포함한 업그레이드 절차를 담당한다.
 public class EmployeeUpgradeManager : SingletonMonoBehaviour<EmployeeUpgradeManager>
 {
     public EmployeeUpgradeModel Upgrades { get; private set; }
@@ -34,14 +33,33 @@ public class EmployeeUpgradeManager : SingletonMonoBehaviour<EmployeeUpgradeMana
         return Upgrades.GetMultiplier(employeeId, statType);
     }
 
-    public bool TryUpgrade(string employeeId, EmployeeStatType statType)
+    public int GetUpgradeCost(string employeeId, EmployeeStatType statType)
     {
+        return Upgrades.GetUpgradeCost(employeeId, statType);
+    }
+
+    // 비용을 지불할 수 있을 때만 레벨업하고, 성공 시 spender에게서 차감한다
+    public bool TryUpgrade(string employeeId, EmployeeStatType statType, ICurrencySpender spender)
+    {
+        if (Upgrades.IsMaxLevel(employeeId, statType))
+        {
+            return false;
+        }
+
+        int cost = Upgrades.GetUpgradeCost(employeeId, statType);
+        if (spender.Amount < cost)
+        {
+            Debug.Log($"[EmployeeUpgrade] 잔액 부족 — {employeeId} {statType} 비용 {cost}, 보유 {spender.Amount}");
+            return false;
+        }
+
         if (!Upgrades.TryLevelUp(employeeId, statType))
         {
             return false;
         }
 
-        Debug.Log($"[EmployeeUpgrade] {employeeId} {statType} → Lv{Upgrades.GetLevel(employeeId, statType)} (x{Upgrades.GetMultiplier(employeeId, statType):0.0})");
+        spender.SpendMoney(cost);
+        Debug.Log($"[EmployeeUpgrade] {employeeId} {statType} → Lv{Upgrades.GetLevel(employeeId, statType)} (x{Upgrades.GetMultiplier(employeeId, statType):0.0}), 비용 {cost}");
         return true;
     }
 
@@ -60,14 +78,26 @@ public class EmployeeUpgradeManager : SingletonMonoBehaviour<EmployeeUpgradeMana
             return;
         }
 
+        if (!keyboard.digit1Key.wasPressedThisFrame && !keyboard.digit2Key.wasPressedThisFrame)
+        {
+            return;
+        }
+
+        var spender = FindFirstObjectByType<PlayerView>();
+        if (spender == null)
+        {
+            Debug.LogWarning("[EmployeeUpgrade] 치트 실패 — 씬에서 PlayerView를 찾을 수 없습니다.");
+            return;
+        }
+
         if (keyboard.digit1Key.wasPressedThisFrame)
         {
-            TryUpgrade(_cheatTargetId, EmployeeStatType.Speed);
+            TryUpgrade(_cheatTargetId, EmployeeStatType.Speed, spender);
         }
 
         if (keyboard.digit2Key.wasPressedThisFrame)
         {
-            TryUpgrade(_cheatTargetId, EmployeeStatType.WorkRate);
+            TryUpgrade(_cheatTargetId, EmployeeStatType.WorkRate, spender);
         }
     }
 #endif
